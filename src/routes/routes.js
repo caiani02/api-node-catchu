@@ -1,12 +1,12 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-const UsuariosController = require('../controllers/usuarios'); 
+const ReservasController = require('../controllers/reservas'); 
 
-router.get('/usuarios', UsuariosController.listarUsuarios); 
-router.post('/usuarios', UsuariosController.cadastrarUsuarios); 
-router.patch('/usuarios', UsuariosController.editarUsuarios); 
-router.delete('/usuarios', UsuariosController.apagarUsuarios); 
+router.get('/reservas', ReservasController.listarReservas); 
+router.post('/reservas', ReservasController.cadastrarReservas); 
+router.patch('/reservas', ReservasController.editarReservas); 
+router.delete('/reservas', ReservasController.apagarReservas); 
 
 
 module.exports = router;
