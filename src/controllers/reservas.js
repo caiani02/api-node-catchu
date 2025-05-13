@@ -3,13 +3,20 @@ const db = require('../database/connection');
 module.exports = {
     async listarReservas(request, response) {
 
+            const sql = `
+            SELECT res_id, obj_id, usu_id, res_data,
+            res_status 
+            FROM reservas;
+            `;
 
+        const [rows] = await db.query(sql);
         
         try {
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de reservas', 
-                dados: null
+                itens: rows.length,
+                dados: rows
             });
         } catch (error) {
             return response.status(500).json({
