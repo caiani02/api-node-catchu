@@ -28,10 +28,32 @@ module.exports = {
     }, 
     async cadastrarReservas(request, response) {
         try {
+
+            const {obj_id, usu_id, res_data, res_status} = request.body;
+
+            const sql = `
+            INSERT INTO reservas
+             (obj_id, usu_id, res_data, res_status) 
+            VALUES 
+                (?,?,?,?)
+            `;
+
+            const values = [obj_id, usu_id, res_data, res_status];
+
+            const [result] = await db.query(sql, values);
+
+            const dados = {
+                res_id: result.insertId,
+                obj_id,
+                usu_id,
+                res_data,
+                res_status
+            }
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Cadastro de reservas', 
-                dados: null
+                dados: dados
             });
         } catch (error) {
             return response.status(500).json({

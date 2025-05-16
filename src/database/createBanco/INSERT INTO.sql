@@ -104,69 +104,187 @@ SELECT * FROM objetos;
 
 INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
 VALUES 
-(1, 'Ótimo atendimento, muito satisfeito!', NOW(), 5),
-(2, 'A experiência foi boa, mas poderia melhorar.', NOW(), 4),
-(3, 'Não gostei do serviço prestado.', NOW(), 2),
-(9, 'Tudo perfeito! Recomendo muito.', NOW(), 5),
+(1, 'Ótimo atendimento, muito satisfeito!', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(2, 'A experiência foi boa, mas poderia melhorar.', NOW(), 4);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(3, 'Não gostei do serviço prestado.', NOW(), 2);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(9, 'Tudo perfeito! Recomendo muito.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
 (5, 'Tive alguns problemas, mas foram resolvidos rapidamente.', NOW(), 4),
-(6, 'Atendimento razoável, esperava mais.', NOW(), 3),
-(7, 'Muito bom! Fiquei satisfeito com tudo.', NOW(), 5),
-(8, 'Poderiam melhorar o tempo de resposta.', NOW(), 3),
-(9, 'Serviço de qualidade, equipe atenciosa.', NOW(), 5),
-(10, 'Não recomendo, tive vários problemas.', NOW(), 1),
-(1, 'O suporte foi excelente, resolveram rápido.', NOW(), 5),
-(2, 'Gostei bastante, voltarei a usar o serviço.', NOW(), 4),
-(20, 'Nada satisfeito, atendimento demorado.', NOW(), 2),
-(4, 'Ótima experiência, tudo conforme o esperado.', NOW(), 5),
-(7, 'Bom serviço, mas pode melhorar.', NOW(), 4),
-(6, 'Equipe bem treinada, atendimento nota 10.', NOW(), 5),
-(7, 'Achei caro pelo que foi oferecido.', NOW(), 3),
-(23, 'Me senti bem atendido, equipe simpática.', NOW(), 5),
-(9, 'Demorou muito para resolverem meu problema.', NOW(), 2),
-(30, 'Tudo excelente, do início ao fim.', NOW(), 5),
-(1, 'Amei o atendimento, continuem assim!', NOW(), 5),
-(2, 'Boa experiência, voltarei a utilizar.', NOW(), 4),
-(3, 'Fiquei decepcionado com o suporte.', NOW(), 2),
-(21, 'Tudo ótimo, recomendo sem dúvidas.', NOW(), 5),
-(5, 'Achei o sistema um pouco confuso.', NOW(), 3),
-(15, 'Rápido e eficiente, gostei muito.', NOW(), 5),
-(7, 'Tive dificuldades, mas foram atenciosos.', NOW(), 4),
-(8, 'Nada a reclamar, tudo excelente!', NOW(), 5),
-(9, 'Suporte poderia ser mais ágil.', NOW(), 3),
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(6, 'Atendimento razoável, esperava mais.', NOW(), 3);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(7, 'Muito bom! Fiquei satisfeito com tudo.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(8, 'Poderiam melhorar o tempo de resposta.', NOW(), 3);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(9, 'Serviço de qualidade, equipe atenciosa.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(10, 'Não recomendo, tive vários problemas.', NOW(), 1);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(1, 'O suporte foi excelente, resolveram rápido.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(2, 'Gostei bastante, voltarei a usar o serviço.', NOW(), 4);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(20, 'Nada satisfeito, atendimento demorado.', NOW(), 2);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(4, 'Ótima experiência, tudo conforme o esperado.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(7, 'Bom serviço, mas pode melhorar.', NOW(), 4);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(6, 'Equipe bem treinada, atendimento nota 10.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(7, 'Achei caro pelo que foi oferecido.', NOW(), 3);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(23, 'Me senti bem atendido, equipe simpática.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(9, 'Demorou muito para resolverem meu problema.', NOW(), 2);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(30, 'Tudo excelente, do início ao fim.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(1, 'Amei o atendimento, continuem assim!', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(2, 'Boa experiência, voltarei a utilizar.', NOW(), 4);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(3, 'Fiquei decepcionado com o suporte.', NOW(), 2);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(21, 'Tudo ótimo, recomendo sem dúvidas.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(5, 'Achei o sistema um pouco confuso.', NOW(), 3);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(15, 'Rápido e eficiente, gostei muito.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(7, 'Tive dificuldades, mas foram atenciosos.', NOW(), 4);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(8, 'Nada a reclamar, tudo excelente!', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
+(9, 'Suporte poderia ser mais ágil.', NOW(), 3);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
 (17, 'Uma das melhores experiências que já tive.', NOW(), 5);
+INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+VALUES 
 SELECT * FROM feedbacks;
 
 INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
 VALUES 
-(1, 23, NOW(), 'pendente'),
-(2, 20, NOW(), 'retirado'),
-(10, 17, NOW(), 'pendente'),
-(4, 4, NOW(), 'pendente'),
-(24, 5, NOW(), 'retirado'),
-(6, 10, NOW(), 'pendente'),
-(30, 9, NOW(), 'retirado'),
+(1, 23, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(2, 20, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(10, 17, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(4, 4, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(24, 5, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(6, 10, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(30, 9, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
 (7, 8, NOW(), 'pendente'),
-(9, 9, NOW(), 'retirado'),
-(6, 10, NOW(), 'pendente'),
-(11, 26, NOW(), 'retirado'),
-(12, 20, NOW(), 'pendente'),
-(21, 13, NOW(), 'pendente'),
-(14, 28, NOW(), 'retirado'),
-(30, 15, NOW(), 'pendente'),
-(16, 16, NOW(), 'retirado'),
-(17, 22, NOW(), 'pendente'),
-(18, 18, NOW(), 'retirado'),
-(19, 1, NOW(), 'pendente'),
-(2, 20, NOW(), 'pendente'),
-(21, 5, NOW(), 'pendente'),
-(30, 22, NOW(), 'retirado'),
-(23, 1, NOW(), 'pendente'),
-(24, 6, NOW(), 'retirado'),
-(25, 25, NOW(), 'pendente'),
-(26, 8, NOW(), 'retirado'),
-(27, 27, NOW(), 'pendente'),
-(10, 28, NOW(), 'retirado'),
-(29, 15, NOW(), 'pendente'),
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(9, 9, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(6, 10, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(11, 26, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(12, 20, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(21, 13, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(14, 28, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(30, 15, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(16, 16, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(17, 22, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(18, 18, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(19, 1, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(2, 20, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(21, 5, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(30, 22, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(23, 1, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(24, 6, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(25, 25, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(26, 8, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(27, 27, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(10, 28, NOW(), 'retirado');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
+(29, 15, NOW(), 'pendente');
+INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
+VALUES 
 (2, 30, NOW(), 'pendente');
 SELECT * FROM reservas;
 
