@@ -65,11 +65,43 @@ module.exports = {
     }, 
     async editarReservas(request, response) {
         try {
+
+            const {obj_id, usu_id, res_data, res_status} = request.body;
+
+            const {res_id} = request.params;
+
+            const sql = `
+            UPDATE reservas SET
+                obj_id = ?, usu_id = ?, res_data = ?, res_status = ?
+            WHERE
+                res_id = ?;
+            `;
+
+            const values = [obj_id, usu_id, res_data, res_status, res_id];
+            
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows === 0) {
+                return response.status(404).json({
+                    sucesso: false,
+                    mensagem: `Reserva ${res_id} não encontrado!`,
+                    dados:null
+                });
+            }
+
+            const dados = {
+                res_id,
+                obj_id,
+                usu_id,
+                res_status
+            };
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no cadastro de reservas', 
-                dados: null
+                mensagem: `Reserva ${res_id} atualizado com sucesso!`, 
+                dados
             });
+            
         } catch (error) {
             return response.status(500).json({
                 sucesso: false, 
