@@ -112,11 +112,29 @@ module.exports = {
     }, 
     async apagarReservas(request, response) {
         try {
+
+            const {res_id} = request.params;
+
+            const sql = `DELETE FROM reservas WHERE res_id = ?`;
+
+            const values = [res_id];
+
+            const [result] = await db.query (sql, values);
+
+            if (result.affectedRows === 0){
+                return response.status (404).json ({
+                    sucesso:false,
+                    mensagem:`Reserva ${res_id} não encontrado!`,
+                    dados: null
+                });
+            }
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Exclusão de reserva', 
+                mensagem: `Reserva ${res_id} excluído com sucesso`, 
                 dados: null
             });
+
         } catch (error) {
             return response.status(500).json({
                 sucesso: false, 
