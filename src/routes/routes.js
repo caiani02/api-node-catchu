@@ -1,12 +1,17 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-const ReservasController = require('../controllers/reservas'); 
+const RotasCaiani = require('./routes-caiani'); 
+const RotasPaci = require('./routes-paci'); 
+const RotasThiago = require('./routes-thiago');
+const RotasPedro = require('./routes-pedro');  
+const RotasMurilo = require('./routes-murilo');  
 
-router.get('/reservas', ReservasController.listarReservas); 
-router.post('/reservas', ReservasController.cadastrarReservas); 
-router.patch('/reservas/:res_id', ReservasController.editarReservas); 
-router.delete('/reservas/:res_id', ReservasController.apagarReservas); 
+router.use('/', RotasCaiani);
+router.use('/', RotasPaci);
+router.use('/', RotasThiago);
+router.use('/', RotasPedro);
+router.use('/', RotasMurilo);
 
 
 module.exports = router;
