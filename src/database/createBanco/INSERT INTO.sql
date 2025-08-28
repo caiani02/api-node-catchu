@@ -96,65 +96,16 @@ SELECT * FROM usuarios;
 Tabela de categorias
 
 INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Documentos Pessoais', 'icon-documents.png');
+( 'Resgatados', 'icon-resgatados.png');
 INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Carteira de Identidade', 'icon-idcard.png');
+('Roupas', 'icon-roupas.png');
 INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'CNH (Carteira de Habilitação)', 'icon-cnh.png');
+( 'Objetos gerais', 'icon-objetos-gerais.png');
 INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Passaporte', 'icon-passport.png');
+( 'Material escolar', 'icon-material-escolar.png');
 INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Cartões Bancários', 'icon-creditcard.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Dinheiro', 'icon-money.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Celulares', 'icon-phone.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Notebooks', 'icon-laptop.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Tablets', 'icon-tablet.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Fones de Ouvido', 'icon-headphones.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Chaves de Casa', 'icon-keys.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Chaves de Carro', 'icon-car-keys.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Bolsas e Mochilas', 'icon-bag.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Malas de Viagem', 'icon-suitcase.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Roupas', 'icon-clothes.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Óculos de Grau', 'icon-glasses.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Óculos de Sol', 'icon-sunglasses.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Relógios', 'icon-watch.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Pulseiras e Anéis', 'icon-jewelry.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Brinquedos', 'icon-toys.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Livros e Cadernos', 'icon-books.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Instrumentos Musicais', 'icon-music.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Equipamentos Esportivos', 'icon-sports.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Fitas e Pen Drives', 'icon-pendrive.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Ferramentas', 'icon-tools.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Câmeras Fotográficas', 'icon-camera.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Patinetes e Bicicletas', 'icon-bike.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-('Animais Perdidos', 'icon-pets.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Remédios e Medicamentos', 'icon-medicine.png');
-INSERT INTO categorias ( categ_nome, categ_icone) VALUES
-( 'Outros', 'icon-other.png');
+( 'Calçados', 'icon-calcados.png');
+
 
 SELECT * FROM categorias;
 
@@ -162,94 +113,136 @@ Tabela de objetos
 
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 1, 'Celular Samsung preto com capinha azul', 'celular1.png', 'Biblioteca', NOW(), 'achado', 0);
+(3, 1, 'Celular Samsung preto com capinha azul', 'celular1.png', 'Biblioteca', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (2, 3, 'Jaqueta azul tamanho M com bolso rasgado', 'jaqueta1.png', 'Quadra de esportes', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (3, 5, 'Relógio de pulso prata marca Casio', 'relogio1.png', 'Cantina', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (4, 2, 'Caderno de Matemática capa vermelha', 'caderno1.png', 'Sala 203', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 4, 'Chaveiro com 3 chaves e chaveiro do Batman', 'chaveiro1.png', 'Estacionamento', NOW(), 'perdido', 0);
+(3, 4, 'Chaveiro com 3 chaves e chaveiro do Batman', 'chaveiro1.png', 'Estacionamento', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 6, 'Fone de ouvido preto JBL', 'fone1.png', 'Sala de estudos', NOW(), 'achado', 1);
+(3, 6, 'Fone de ouvido preto JBL', 'fone1.png', 'Sala de estudos', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (3, 7, 'Carteira de couro marrom sem documentos', 'carteira1.png', 'Corredor principal', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (2, 8, 'Blusa de moletom cinza tamanho G', 'moletom1.png', 'Auditório', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (4, 9, 'Estojo azul com várias canetas coloridas', 'estojo1.png', 'Biblioteca', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 10, 'Chave de carro com chaveiro vermelho', 'chave2.png', 'Portaria', NOW(), 'reservado', 0);
+(3, 10, 'Chave de carro com chaveiro vermelho', 'chave2.png', 'Portaria', NOW(), 'reservado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 11, 'Óculos de sol Ray-Ban preto', 'oculos1.png', 'Cantina', NOW(), 'achado', 1);
+(3, 11, 'Óculos de sol Ray-Ban preto', 'oculos1.png', 'Cantina', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(2, 12, 'Garrafa térmica azul com adesivos', 'garrafa1.png', 'Sala dos professores', NOW(), 'reservado', 0);
+(3, 12, 'Garrafa térmica azul com adesivos', 'garrafa1.png', 'Sala dos professores', NOW(), 'reservado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (3, 13, 'Fone Bluetooth branco Apple', 'fone2.png', 'Banheiro do 2º andar', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(4, 14, 'Bolsinha vermelha com maquiagem', 'bolsa1.png', 'Laboratório de química', NOW(), 'achado', 1);
+(3, 14, 'Bolsinha vermelha com maquiagem', 'bolsa1.png', 'Laboratório de química', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 15, 'Cinto de couro marrom com fivela prata', 'cinto1.png', 'Vestiário masculino', NOW(), 'perdido', 0);
+(2, 15, 'Cinto de couro marrom com fivela prata', 'cinto1.png', 'Vestiário masculino', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 16, 'Mouse sem fio Logitech preto', 'mouse1.png', 'Sala de informática', NOW(), 'achado', 0);
+(3, 16, 'Mouse sem fio Logitech preto', 'mouse1.png', 'Sala de informática', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (2, 17, 'Boné Adidas azul escuro', 'bone1.png', 'Pátio', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (3, 18, 'Carregador de celular Motorola branco', 'carregador1.png', 'Biblioteca', NOW(), 'reservado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(4, 19, 'Pulseira dourada fina', 'pulseira1.png', 'Corredor do bloco B', NOW(), 'achado', 1);
+(3, 19, 'Pulseira dourada fina', 'pulseira1.png', 'Corredor do bloco B', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 20, 'Livro "O Pequeno Príncipe" capa amarela', 'livro1.png', 'Auditório', NOW(), 'perdido', 0);
+(4, 20, 'Livro "O Pequeno Príncipe" capa amarela', 'livro1.png', 'Auditório', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 21, 'Relógio digital preto XIAOMI', 'relogio2.png', 'Quadra esportiva', NOW(), 'achado', 0);
+(3, 21, 'Relógio digital preto XIAOMI', 'relogio2.png', 'Quadra esportiva', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(2, 22, 'Chave única com pingente azul', 'chave3.png', 'Banheiro feminino', NOW(), 'achado', 1);
+(3, 22, 'Chave única com pingente azul', 'chave3.png', 'Banheiro feminino', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(3, 23, 'Jaqueta jeans tamanho P', 'jaqueta2.png', 'Biblioteca', NOW(), 'perdido', 0);
+(2, 23, 'Jaqueta jeans tamanho P', 'jaqueta2.png', 'Biblioteca', NOW(), 'perdido', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(4, 24, 'Pasta com documentos universitários', 'pasta1.png', 'Sala dos professores', NOW(), 'achado', 1);
+(3, 24, 'Pasta com documentos universitários', 'pasta1.png', 'Sala dos professores', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 25, 'Bicicleta vermelha com adesivos', 'bike1.png', 'Estacionamento', NOW(), 'reservado', 0);
+(3, 25, 'Bicicleta vermelha com adesivos', 'bike1.png', 'Estacionamento', NOW(), 'reservado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(1, 26, 'Headset gamer HyperX preto', 'headset1.png', 'Sala de informática', NOW(), 'achado', 0);
+(3, 26, 'Headset gamer HyperX preto', 'headset1.png', 'Sala de informática', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (2, 27, 'Mochila preta com chaveiro de pelúcia', 'mochila1.png', 'Cantina', NOW(), 'achado', 1);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
 (3, 28, 'Tablet Samsung branco', 'tablet1.png', 'Biblioteca', NOW(), 'reservado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(4, 29, 'Garrafa de vidro verde com tampa branca', 'garrafa2.png', 'Sala de estudos', NOW(), 'achado', 0);
+(3, 29, 'Garrafa de vidro verde com tampa branca', 'garrafa2.png', 'Sala de estudos', NOW(), 'achado', 0);
+
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 30, 'Camiseta preta com estampa de banda', 'camiseta1.png', 'Pátio', NOW(), 'perdido', 0);
+(2, 30, 'Camiseta preta com estampa de banda', 'camiseta1.png', 'Pátio', NOW(), 'perdido', 0);
+
+INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
+VALUES 
+(5, 2, 'Tênis Nike branco tamanho 42', 'tenis1.png', 'Quadra de esportes', NOW(), 'achado', 0);
+
+INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
+VALUES 
+(5, 5, 'Sapato social preto tamanho 40', 'sapato1.png', 'Auditório', NOW(), 'perdido', 0);
+
+INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
+VALUES 
+(5, 10, 'Chinelo Havaianas azul', 'chinelo1.png', 'Piscina', NOW(), 'achado', 1);
+
 
 SELECT * FROM objetos;
 
