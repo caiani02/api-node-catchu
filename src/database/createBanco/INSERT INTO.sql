@@ -1,95 +1,95 @@
 Tabela de usuários
 
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('João Silva', 'joao.silva@email.com', '12345678', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Maria Souza', 'maria.souza@email.com', '87654321', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Carlos Oliveira', 'carlos.oliveira@email.com', 'abcd1234', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Ana Lima', 'ana.lima@email.com', 'senha123', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Fernando Costa', 'fernando.costa@email.com', 'qwerty12', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Patrícia Mendes', 'patricia.mendes@email.com', 'pass1234', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Roberto Nunes', 'roberto.nunes@email.com', 'segura12', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Camila Rocha', 'camila.rocha@email.com', 'teste123', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('André Martins', 'andre.martins@email.com', 'abcd5678', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Juliana Alves', 'juliana.alves@email.com', 'juliana1', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Lucas Ferreira', 'lucas.ferreira@email.com', 'lucas123', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Eduarda Lima', 'eduarda.lima@email.com', 'eduarda7', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Bruno Cardoso', 'bruno.cardoso@email.com', 'bruno56', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Gabriela Souza', 'gabriela.souza@email.com', 'gabisouz', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Ricardo Mendes', 'ricardo.mendes@email.com', 'ricardo9', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Vanessa Carvalho', 'vanessa.carvalho@email.com', 'vanessa1', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Fábio Moreira', 'fabio.moreira@email.com', 'fabio321', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Tatiane Oliveira', 'tatiane.oliveira@email.com', 'tatiane9', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Gustavo Ribeiro', 'gustavo.ribeiro@email.com', 'gustavo7', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Letícia Gomes', 'leticia.gomes@email.com', 'leticia5', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Renato Silva', 'renato.silva@email.com', 'renato66', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Mariana Santos', 'mariana.santos@email.com', 'mari88', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Thiago Almeida', 'thiago.almeida@email.com', 'thiago44', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Jéssica Fernandes', 'jessica.fernandes@email.com', 'jessica2', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Rodrigo Nogueira', 'rodrigo.nogueira@email.com', 'rodrigo9', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Amanda Castro', 'amanda.castro@email.com', 'amanda77', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Felipe Araújo', 'felipe.araujo@email.com', 'felipe33', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Simone Costa', 'simone.costa@email.com', 'simone22', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Bruna Sales', 'bruna.sales@email.com', 'bruna10', NOW());
-INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
-VALUES 
-('Paulo Henrique', 'paulo.henrique@email.com', 'paulo55', NOW());
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('João Silva', 'joao.silva@email.com', '12345678', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Maria Souza', 'maria.souza@email.com', '87654321', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Carlos Oliveira', 'carlos.oliveira@email.com', 'abcd1234', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Ana Lima', 'ana.lima@email.com', 'senha123', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Fernando Costa', 'fernando.costa@email.com', 'qwerty12', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Patrícia Mendes', 'patricia.mendes@email.com', 'pass1234', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Roberto Nunes', 'roberto.nunes@email.com', 'segura12', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Camila Rocha', 'camila.rocha@email.com', 'teste123', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('André Martins', 'andre.martins@email.com', 'abcd5678', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Juliana Alves', 'juliana.alves@email.com', 'juliana1', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Lucas Ferreira', 'lucas.ferreira@email.com', 'lucas123', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Eduarda Lima', 'eduarda.lima@email.com', 'eduarda7', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Bruno Cardoso', 'bruno.cardoso@email.com', 'bruno56', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Gabriela Souza', 'gabriela.souza@email.com', 'gabisouz', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Ricardo Mendes', 'ricardo.mendes@email.com', 'ricardo9', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Vanessa Carvalho', 'vanessa.carvalho@email.com', 'vanessa1', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Fábio Moreira', 'fabio.moreira@email.com', 'fabio321', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Tatiane Oliveira', 'tatiane.oliveira@email.com', 'tatiane9', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Gustavo Ribeiro', 'gustavo.ribeiro@email.com', 'gustavo7', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Letícia Gomes', 'leticia.gomes@email.com', 'leticia5', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Renato Silva', 'renato.silva@email.com', 'renato66', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Mariana Santos', 'mariana.santos@email.com', 'mari88', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Thiago Almeida', 'thiago.almeida@email.com', 'thiago44', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Jéssica Fernandes', 'jessica.fernandes@email.com', 'jessica2', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Rodrigo Nogueira', 'rodrigo.nogueira@email.com', 'rodrigo9', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Amanda Castro', 'amanda.castro@email.com', 'amanda77', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Felipe Araújo', 'felipe.araujo@email.com', 'felipe33', 0, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Simone Costa', 'simone.costa@email.com', 'simone22', 1, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Bruna Sales', 'bruna.sales@email.com', 'bruna10', 2, NOW());
+
+INSERT INTO usuarios (usu_nome, usu_email, usu_senha, usu_tipo, usu_data_cadastro)
+VALUES ('Paulo Henrique', 'paulo.henrique@email.com', 'paulo55', 0, NOW());
+
 
 SELECT * FROM usuarios;
 
@@ -262,7 +262,7 @@ VALUES
 (9, 'Tudo perfeito! Recomendo muito.', NOW(), 5);
 INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
 VALUES 
-(5, 'Tive alguns problemas, mas foram resolvidos rapidamente.', NOW(), 4),
+(5, 'Tive alguns problemas, mas foram resolvidos rapidamente.', NOW(), 4);
 INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
 VALUES 
 (6, 'Atendimento razoável, esperava mais.', NOW(), 3);
@@ -364,7 +364,7 @@ VALUES
 (30, 9, NOW(), 'retirado');
 INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
 VALUES 
-(7, 8, NOW(), 'pendente'),
+(7, 8, NOW(), 'pendente');
 INSERT INTO reservas (obj_id, usu_id, res_data, res_status) 
 VALUES 
 (9, 9, NOW(), 'retirado');

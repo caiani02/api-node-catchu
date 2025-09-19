@@ -7,6 +7,7 @@ CREATE TABLE Usuarios (
     usu_nome VARCHAR(80) NOT NULL,
     usu_email VARCHAR(50) UNIQUE NOT NULL,
     usu_senha VARCHAR(8) NOT NULL,
+    usu_tipo INT NOT NULL, -- 0 - Desativado -- 1 - Admnistrador -- 2 - Usuário
     usu_data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
