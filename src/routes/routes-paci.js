@@ -7,6 +7,6 @@ router.get('/usuarios', UsuariosController.listarUsuarios);
 router.post('/usuarios', UsuariosController.cadastrarUsuarios); 
 router.patch('/usuarios/:usu_id', UsuariosController.editarUsuarios); 
 router.delete('/usuarios/:usu_id', UsuariosController.apagarUsuarios); 
-
+router.get('/login', UsuariosController.login);
 
 module.exports = router;
