@@ -3,14 +3,32 @@ const db = require('../database/connection');
 module.exports = {
     async listarObjetos(request, response) {
     
-        
-        try {
-            const sql = `
-              SELECT obj_id, categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado = 1 AS obj_encontrado
-              FROM objetos;  
-            `;
+        const { obj_id, obj_descricao, obj_local_encontrado, obj_encontrado, obj_status, page = 1, limit = 5} = request.query;
+        const offset = (parseInt(page) - 1) * parseInt(limit);
 
-            const [rows] = await db.query(sql);
+        try {
+           const sql = `
+            SELECT 
+                obj_id, 
+                categ_id, 
+                usu_id, 
+                obj_descricao, 
+                obj_foto, 
+                obj_local_encontrado, 
+                obj_data_publicacao, 
+                obj_status, 
+                obj_encontrado
+            FROM objetos 
+            LIMIT ?, ?;
+        `;
+console.log('sss');
+
+            console.log(limit);
+            
+        const dadosPesq = [offset, parseInt(limit)];
+
+        // Passa offset e limit como parâmetros (igual no code do professor)
+        const [rows] = await db.query(sql, dadosPesq);
 
             return response.status(200).json({
                 sucesso: true, 
@@ -144,44 +162,4 @@ module.exports = {
             });
         }
     }, 
-
-        async listarObjetos(request, response) {
-        try {
-            const { nome } = request.query;
-
-            const obj_descricao = nome ? `%${nome}%` : '%';
-            const sql = `
-                SELECT
-                    obj_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado = 1 AS obj_encontrado
-                FROM
-                   objetos
-                WHERE
-                    obj_descricao like ?;
-            `;
-
-            const values = [obj_descricao];
-
-            const [rows] = await db.query(sql, values);
-            const nItens = rows.length;
-
-            const dados = rows.map(objetos => ({
-                id: objetos.obj_id,
-                nome: objetos.obj_descricao,
-                img: objetos.obj_foto,
-            }));
-
-            return response.status(200).json({
-                sucesso: true,
-                mensagem: 'Lista de Objetos.',
-                nItens,
-                dados
-            });
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false,
-                mensagem: 'Erro na requisição.',
-                dados: error.message
-            });
-        }
-    }
 };  
