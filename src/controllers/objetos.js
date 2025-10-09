@@ -1,49 +1,88 @@
 const db = require('../database/connection'); 
 
 module.exports = {
-    async listarObjetos(request, response) {
+   async listarObjetos(request, response) {
+  const {
+    obj_id,
+    obj_descricao,
+    obj_local_encontrado,
+    obj_encontrado,
+    obj_status,
+    page = 1,
+    limit = 5
+  } = request.query;
+
+  const offset = (parseInt(page) - 1) * parseInt(limit);
+
+  try {
+    // 🔹 Base SQL com aliases (nomes de campos tratados)
+    let sql = `
+      SELECT 
+        obj_id AS id,
+        categ_id AS categoria_id,
+        usu_id AS usuario_id,
+        obj_descricao AS descricao,
+        obj_foto AS foto,
+        obj_local_encontrado AS local_encontrado,
+        DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS data_publicacao,
+        obj_status AS status,
+        obj_encontrado AS encontrado
+      FROM objetos
+      WHERE 1=1
+    `;
+
+    const params = [];
+
+    // 🔹 Pesquisa com múltiplos parâmetros
+    if (obj_id) {
+      sql += ' AND obj_id = ?';
+      params.push(obj_id);
+    }
+
+    if (obj_descricao) {
+      sql += ' AND obj_descricao LIKE ?';
+      params.push(`%${obj_descricao}%`);
+    }
+
+    if (obj_local_encontrado) {
+      sql += ' AND obj_local_encontrado LIKE ?';
+      params.push(`%${obj_local_encontrado}%`);
+    }
+
+    if (obj_status) {
+      sql += ' AND obj_status = ?';
+      params.push(obj_status);
+    }
+
+    if (obj_encontrado) {
+      sql += ' AND obj_encontrado = ?';
+      params.push(obj_encontrado);
+    }
+
+    // 🔹 Paginação
+    sql += ' LIMIT ?, ?';
+    params.push(offset, parseInt(limit));
+
+    // 🔹 Execução da query
+    const [rows] = await db.query(sql, params);
+
+    return response.status(200).json({
+      sucesso: true,
+      mensagem: 'Lista de objetos retornada com sucesso!',
+      itens: rows.length,
+      dados: rows
+    });
+
+  } catch (error) {
+    return response.status(500).json({
+      sucesso: false,
+      mensagem: 'Erro na requisição.',
+      dados: error.message
+    });
+  }
+}, 
+
     
-        const { obj_id, obj_descricao, obj_local_encontrado, obj_encontrado, obj_status, page = 1, limit = 5} = request.query;
-        const offset = (parseInt(page) - 1) * parseInt(limit);
-
-        try {
-           const sql = `
-            SELECT 
-                obj_id, 
-                categ_id, 
-                usu_id, 
-                obj_descricao, 
-                obj_foto, 
-                obj_local_encontrado, 
-                obj_data_publicacao, 
-                obj_status, 
-                obj_encontrado
-            FROM objetos 
-            LIMIT ?, ?;
-        `;
-console.log('sss');
-
-            console.log(limit);
-            
-        const dadosPesq = [offset, parseInt(limit)];
-
-        // Passa offset e limit como parâmetros (igual no code do professor)
-        const [rows] = await db.query(sql, dadosPesq);
-
-            return response.status(200).json({
-                sucesso: true, 
-                mensagem: 'Lista de objetos', 
-                itens: rows.lenght,
-                dados: rows,
-            });
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
-                dados: error.message
-            });
-        }
-    }, 
 
    
     async cadastrarObjetos(request, response) {
