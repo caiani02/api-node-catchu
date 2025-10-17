@@ -71,7 +71,7 @@ module.exports = {
     const dados = rows.map(objetos => ({
 
     ...objetos,
-    ing_img: gerarUrl(objetos.ing_img, 'objetos', 'sem.jpg')
+    ing_img: gerarUrl(objetos.ing_img, 'objetos', 'sem.png')
 
 }));
 

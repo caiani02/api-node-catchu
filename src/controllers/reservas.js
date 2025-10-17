@@ -10,7 +10,7 @@ module.exports = {
             FROM reservas;
             `;
 
-        const [rows] = await db.query(sql, values);
+        const [rows] = await db.query(sql);
          const nItens = rows.length;
 
         const dados = rows.map(reservas => ({
