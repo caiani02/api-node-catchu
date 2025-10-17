@@ -1,4 +1,6 @@
 const db = require('../database/connection'); 
+const { gerarUrl } = require('../utils/gerarUrl');
+const objetos = require('./objetos');
 
 module.exports = {
     async listarCategorias(request, response) {
@@ -11,13 +13,22 @@ module.exports = {
                 FROM categorias;
             `;
 
-            const [rows] = await db.query(sql);
+            const [rows] = await db.query(sql, values);
+            const nItens = rows.length;
+
+const dados = rows.map(categorias => ({
+
+    ...categorias,
+    ing_img: gerarUrl(categorias.ing_img, 'categorias', 'sem.jpg')
+
+}));
+
 
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de Categorias',
-                itens: rows.length,
-                dados: rows
+                nItens,
+                dados
             });
         } catch (error) {
             return response.status(500).json({

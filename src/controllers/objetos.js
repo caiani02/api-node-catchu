@@ -1,4 +1,5 @@
 const db = require('../database/connection'); 
+const { gerarUrl } = require('../utils/gerarUrl');
 
 module.exports = {
    async listarObjetos(request, response) {
@@ -65,12 +66,21 @@ module.exports = {
 
     // 🔹 Execução da query
     const [rows] = await db.query(sql, params);
+     const nItens = rows.length;
+
+    const dados = rows.map(objetos => ({
+
+    ...objetos,
+    ing_img: gerarUrl(objetos.ing_img, 'objetos', 'sem.jpg')
+
+}));
+
 
     return response.status(200).json({
       sucesso: true,
       mensagem: 'Lista de objetos retornada com sucesso!',
-      itens: rows.length,
-      dados: rows
+      nItens,
+      dados,
     });
 
   } catch (error) {

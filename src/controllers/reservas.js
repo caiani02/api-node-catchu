@@ -1,4 +1,5 @@
 const db = require('../database/connection'); 
+const { gerarUrl } = require('../utils/gerarUrl');
 
 module.exports = {
     async listarReservas(request, response) {
@@ -9,14 +10,23 @@ module.exports = {
             FROM reservas;
             `;
 
-        const [rows] = await db.query(sql);
+        const [rows] = await db.query(sql, values);
+         const nItens = rows.length;
+
+        const dados = rows.map(reservas => ({
+
+    ...reservas,
+    ing_img: gerarUrl(reservas.ing_img, 'reservas', 'sem.jpg')
+
+}));
+
         
         try {
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de reservas', 
-                itens: rows.length,
-                dados: rows
+                nItens,
+                dados,
             });
         } catch (error) {
             return response.status(500).json({

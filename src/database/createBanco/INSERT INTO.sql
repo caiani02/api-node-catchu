@@ -241,7 +241,7 @@ VALUES
 
 INSERT INTO Objetos (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
 VALUES 
-(5, 10, 'Chinelo Havaianas azul', 'chinelo1.png', 'Piscina', NOW(), 'achado', 1);
+(5, 10, 'Chinelo Havaianas azul', 'chinelo1.png', 'Quadra', NOW(), 'achado', 1);
 
 
 SELECT * FROM objetos;
