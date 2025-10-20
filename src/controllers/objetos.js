@@ -100,6 +100,7 @@ module.exports = {
 
             const {categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status} = request.body;
             const obj_encontrado = 0;
+            const imagem = request.file;
              
             const sql = `
                 INSERT INTO objetos
@@ -108,7 +109,7 @@ module.exports = {
                     (?,?,?,?,?,?,?,?)
             `;
 
-            const values = [categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
+            const values = [  imagem.filename  ,categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
             const [result] = await db.query(sql, values)
             const dados = {
                     obj_id: result.insertId,
