@@ -21,11 +21,11 @@ const uploadImage = (destinationFolder) => {
       cb(null, fullPath);
     },
     filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       // Extrai a extensão do arquivo a partir do mimetype
       const extension = file.mimetype.split('/')[1];
       cb(null, `${uniqueSuffix}.${extension}`);
-    },
+    }
   });
 
   // Filtro para aceitar apenas certos tipos de imagem

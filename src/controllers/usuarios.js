@@ -152,7 +152,7 @@ module.exports = {
             FROM
                 usuarios
             WHERE
-                usu_email = ? AND usu_senha = ? AND usu_tipo = 1;
+                usu_email = ? AND usu_senha = ?;
         `;
 
         const values = [email, senha];

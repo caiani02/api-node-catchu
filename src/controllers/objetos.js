@@ -1,107 +1,107 @@
-const db = require('../database/connection'); 
+const db = require('../database/connection');
 const { gerarUrl } = require('../utils/gerarUrl');
 
 module.exports = {
-   async listarObjetos(request, response) {
-  const {
-    obj_id,
-    obj_descricao,
-    obj_local_encontrado,
-    obj_encontrado,
-    obj_status,
-    page = 1,
-    limit = 5
-  } = request.query;
+    async listarObjetos(request, response) {
+        const {
+            obj_id,
+            obj_descricao,
+            obj_local_encontrado,
+            obj_encontrado,
+            obj_status,
+            page = 1,
+            limit = 5
+        } = request.query; 
 
-  const offset = (parseInt(page) - 1) * parseInt(limit);
+        const offset = (parseInt(page) - 1) * parseInt(limit);
 
-  try {
-    // 🔹 Base SQL com aliases (nomes de campos tratados)
-    let sql = `
-      SELECT 
-        obj_id AS id,
-        categ_id AS categoria_id,
-        usu_id AS usuario_id,
-        obj_descricao AS descricao,
-        obj_foto AS foto,
-        obj_local_encontrado AS local_encontrado,
-        DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS data_publicacao,
-        obj_status AS status,
-        obj_encontrado AS encontrado
-      FROM objetos
-      WHERE 1=1
-    `;
+        try {
+            // 🔹 Base SQL com aliases (nomes de campos tratados)
+            let sql = `
+                SELECT 
+                    obj_id AS id,
+                    categ_id AS categoria_id,
+                    usu_id AS usuario_id,
+                    obj_descricao AS descricao,
+                    obj_foto AS foto,
+                    obj_local_encontrado AS local_encontrado,
+                    DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS data_publicacao,
+                    obj_status AS status,
+                    obj_encontrado = 1 AS encontrado
+                FROM objetos
+                WHERE 1=1
+            `;
 
-    const params = [];
+            const params = [];
 
-    // 🔹 Pesquisa com múltiplos parâmetros
-    if (obj_id) {
-      sql += ' AND obj_id = ?';
-      params.push(obj_id);
-    }
+            // 🔹 Pesquisa com múltiplos parâmetros
+            if (obj_id) {
+                sql += ' AND obj_id = ?';
+                params.push(obj_id);
+            }
 
-    if (obj_descricao) {
-      sql += ' AND obj_descricao LIKE ?';
-      params.push(`%${obj_descricao}%`);
-    }
+            if (obj_descricao) {
+                sql += ' AND obj_descricao LIKE ?';
+                params.push(`%${obj_descricao}%`);
+            }
 
-    if (obj_local_encontrado) {
-      sql += ' AND obj_local_encontrado LIKE ?';
-      params.push(`%${obj_local_encontrado}%`);
-    }
+            if (obj_local_encontrado) {
+                sql += ' AND obj_local_encontrado LIKE ?';
+                params.push(`%${obj_local_encontrado}%`);
+            }
 
-    if (obj_status) {
-      sql += ' AND obj_status = ?';
-      params.push(obj_status);
-    }
+            if (obj_status) {
+                sql += ' AND obj_status = ?';
+                params.push(obj_status);
+            }
 
-    if (obj_encontrado) {
-      sql += ' AND obj_encontrado = ?';
-      params.push(obj_encontrado);
-    }
+            if (obj_encontrado) {
+                sql += ' AND obj_encontrado = ?';
+                params.push(obj_encontrado);
+            }
 
-    // 🔹 Paginação
-    sql += ' LIMIT ?, ?';
-    params.push(offset, parseInt(limit));
+            // 🔹 Paginação
+            sql += ' LIMIT ?, ?';
+            params.push(offset, parseInt(limit));
 
-    // 🔹 Execução da query
-    const [rows] = await db.query(sql, params);
-     const nItens = rows.length;
+            // 🔹 Execução da query
+            const [rows] = await db.query(sql, params);
+            const nItens = rows.length;
 
-    const dados = rows.map(objetos => ({
+            const dados = rows.map(objetos => ({
 
-    ...objetos,
-    ing_img: gerarUrl(objetos.ing_img, 'objetos', 'sem.png')
+                ...objetos,
+                foto: gerarUrl(objetos.foto, 'objetos', 'sem.png')
 
-}));
+            }));
 
 
-    return response.status(200).json({
-      sucesso: true,
-      mensagem: 'Lista de objetos retornada com sucesso!',
-      nItens,
-      dados,
-    });
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Lista de objetos retornada com sucesso!',
+                nItens,
+                dados,
+            });
 
-  } catch (error) {
-    return response.status(500).json({
-      sucesso: false,
-      mensagem: 'Erro na requisição.',
-      dados: error.message
-    });
-  }
-}, 
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
+            });
+        }
+    },
 
-    
 
-   
+
+
     async cadastrarObjetos(request, response) {
         try {
 
-            const {categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status} = request.body;
+            const { categ_id, usu_id, obj_descricao, obj_local_encontrado, obj_data_publicacao, obj_status } = request.body;
             const obj_encontrado = 0;
             const imagem = request.file;
-             
+
             const sql = `
                 INSERT INTO objetos
                     (categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado)
@@ -109,34 +109,34 @@ module.exports = {
                     (?,?,?,?,?,?,?,?)
             `;
 
-            const values = [  imagem.filename  ,categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
+            const values = [categ_id, usu_id, obj_descricao, imagem.filename, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
             const [result] = await db.query(sql, values)
             const dados = {
-                    obj_id: result.insertId,
-                    categ_id,
-                    usu_id,
-                    obj_descricao, 
-                    obj_foto,
-                    obj_local_encontrado,
-                    obj_data_publicacao,
-                    obj_status,
-                    obj_encontrado
+                obj_id: result.insertId,
+                categ_id,
+                usu_id,
+                obj_descricao,
+                imagem,
+                obj_local_encontrado,
+                obj_data_publicacao,
+                obj_status,
+                obj_encontrado
 
             };
 
             return response.status(200).json({
-                sucesso: true, 
-                mensagem: 'Cadastro de objetos', 
+                sucesso: true,
+                mensagem: 'Cadastro de objetos',
                 dados: dados
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
                 dados: error.message
             });
         }
-    }, 
+    },
 
 
     async editarObjetos(request, response) {
@@ -155,7 +155,7 @@ module.exports = {
             const values = [categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado, obj_id];
             const [result] = await db.query(sql, values);
 
-            if (result.affectedRows === 0 ) {
+            if (result.affectedRows === 0) {
                 return response.status(404).json({
                     sucesso: false,
                     mensagem: `Obejto ${obj_id} não encontrado`,
@@ -168,18 +168,18 @@ module.exports = {
             };
 
             return response.status(200).json({
-                sucesso: true, 
-                mensagem: `Objeto ${obj_id} atualizado com sucesso`, 
+                sucesso: true,
+                mensagem: `Objeto ${obj_id} atualizado com sucesso`,
                 dados
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
                 dados: error.message
             });
         }
-    }, 
+    },
 
 
 
@@ -191,7 +191,7 @@ module.exports = {
             const values = [obj_id]
             const [result] = await db.query(sql, values);
 
-            if (result.affectedRows === 0){
+            if (result.affectedRows === 0) {
                 return response.status(404).json({
                     sucesso: false,
                     mensagem: `Objetos ${obj_id} não encontrado!`,
@@ -200,16 +200,16 @@ module.exports = {
             }
 
             return response.status(200).json({
-                sucesso: true, 
-                mensagem: 'Exclusão de objetos', 
+                sucesso: true,
+                mensagem: 'Exclusão de objetos',
                 dados: null
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
                 dados: error.message
             });
         }
-    }, 
+    },
 };  

@@ -5,7 +5,7 @@ const ObjetosController = require('../controllers/objetos');
 
 const uploadImage = require('../middleware/uploadHelper');
 
-const uploadobjetos = uploadImage('objetos')
+const uploadobjetos = uploadImage('Objetos')
 
 
 
