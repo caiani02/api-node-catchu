@@ -29,15 +29,17 @@ module.exports = {
   async cadastrarUsuarios(request, response) {
     try {
       const { usu_nome, usu_email, usu_senha, usu_data_cadastro } = request.body;
+      // se não for informado, define um tipo padrão
+      const usu_tipo = request.body.usu_tipo || 'comum';
 
       const sql = `
         INSERT INTO usuarios
           (usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo) 
         VALUES
-          (?,?,?,?);
+          (?,?,?,?,?);
       `;
 
-      const values = [usu_nome, usu_email, usu_senha, usu_data_cadastro];
+      const values = [usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo];
 
       const [result] = await db.query(sql, values);
 
@@ -46,7 +48,8 @@ module.exports = {
         usu_nome,
         usu_email,
         usu_senha,
-        usu_data_cadastro
+        usu_data_cadastro,
+        usu_tipo
       };
 
       return response.status(200).json({
