@@ -30,7 +30,7 @@ module.exports = {
     try {
       const { usu_nome, usu_email, usu_senha, usu_data_cadastro } = request.body;
       // se não for informado, define um tipo padrão
-      const usu_tipo = request.body.usu_tipo || 'comum';
+      const usu_tipo = request.body.usu_tipo || 2;
 
       const sql = `
         INSERT INTO usuarios
