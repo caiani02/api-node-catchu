@@ -32,7 +32,7 @@ module.exports = {
 
       const sql = `
         INSERT INTO usuarios
-          (usu_nome, usu_email, usu_senha, usu_data_cadastro) 
+          (usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo) 
         VALUES
           (?,?,?,?);
       `;
