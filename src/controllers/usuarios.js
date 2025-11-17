@@ -29,6 +29,24 @@ module.exports = {
   async cadastrarUsuarios(request, response) {
     try {
       const { usu_nome, usu_email, usu_senha, usu_data_cadastro } = request.body;
+      console.log('[POST /usuarios] body:', request.body);
+
+      // Validações básicas
+      if (!usu_nome || !usu_nome.trim()) {
+        return response.status(400).json({ sucesso: false, mensagem: 'Campo usu_nome é obrigatório.', dados: null });
+      }
+      if (!usu_email || !usu_email.trim()) {
+        return response.status(400).json({ sucesso: false, mensagem: 'Campo usu_email é obrigatório.', dados: null });
+      }
+      if (!usu_senha) {
+        return response.status(400).json({ sucesso: false, mensagem: 'Campo usu_senha é obrigatório.', dados: null });
+      }
+
+      // Verifica se email já existe
+      const [existing] = await db.query('SELECT usu_id FROM usuarios WHERE usu_email = ?', [usu_email]);
+      if (existing && existing.length > 0) {
+        return response.status(409).json({ sucesso: false, mensagem: 'E-mail já cadastrado.', dados: null });
+      }
       // se não for informado, define um tipo padrão
       const usu_tipo = request.body.usu_tipo || 2;
 
@@ -41,7 +59,7 @@ module.exports = {
 
       const values = [usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo];
 
-      const [result] = await db.query(sql, values);
+  const [result] = await db.query(sql, values);
 
       const dados = {
         usu_id: result.insertId,
