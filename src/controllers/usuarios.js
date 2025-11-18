@@ -28,7 +28,7 @@ module.exports = {
 
   async cadastrarUsuarios(request, response) {
     try {
-      const { usu_nome, usu_email, usu_senha, usu_data_cadastro } = request.body;
+      const { usu_nome, usu_email, usu_senha } = request.body;
       console.log('[POST /usuarios] body:', request.body);
 
       // Validações básicas
@@ -47,34 +47,36 @@ module.exports = {
       if (existing && existing.length > 0) {
         return response.status(409).json({ sucesso: false, mensagem: 'E-mail já cadastrado.', dados: null });
       }
+
       // se não for informado, define um tipo padrão
       const usu_tipo = request.body.usu_tipo || 2;
 
+      // NOVO INSERT — sem usu_data_cadastro
       const sql = `
         INSERT INTO usuarios
-          (usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo) 
+          (usu_nome, usu_email, usu_senha, usu_tipo)
         VALUES
-          (?,?,?,?,?);
+          (?,?,?,?);
       `;
 
-      const values = [usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_tipo];
+      const values = [usu_nome, usu_email, usu_senha, usu_tipo];
 
-  const [result] = await db.query(sql, values);
+      const [result] = await db.query(sql, values);
 
-      const dados = {
-        usu_id: result.insertId,
-        usu_nome,
-        usu_email,
-        usu_senha,
-        usu_data_cadastro,
-        usu_tipo
-      };
+      // Pega usuário recém-criado
+      const [newRows] = await db.query(
+        'SELECT usu_id, usu_nome, usu_email, usu_tipo, usu_data_cadastro FROM usuarios WHERE usu_id = ?',
+        [result.insertId]
+      );
+
+      const dados = newRows && newRows[0] ? newRows[0] : null;
 
       return response.status(200).json({
         sucesso: true,
         mensagem: 'Cadastro de usuários',
         dados: dados
       });
+
     } catch (error) {
       return response.status(500).json({
         sucesso: false,
@@ -86,17 +88,17 @@ module.exports = {
 
   async editarUsuarios(request, response) {
     try {
-      const { usu_nome, usu_email, usu_senha, usu_data_cadastro } = request.body;
+      const { usu_nome, usu_email, usu_senha } = request.body;
       const { usu_id } = request.params;
 
       const sql = `
         UPDATE usuarios SET
-          usu_nome = ?, usu_email = ?, usu_senha = ?, usu_data_cadastro = ?
+          usu_nome = ?, usu_email = ?, usu_senha = ?
         WHERE
           usu_id = ?;
       `;
 
-      const values = [usu_nome, usu_email, usu_senha, usu_data_cadastro, usu_id];
+      const values = [usu_nome, usu_email, usu_senha, usu_id];
 
       const [result] = await db.query(sql, values);
 
@@ -111,8 +113,7 @@ module.exports = {
       const dados = {
         usu_id,
         usu_nome,
-        usu_email,
-        usu_data_cadastro
+        usu_email
       };
 
       return response.status(200).json({
