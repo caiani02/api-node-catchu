@@ -172,33 +172,60 @@ module.exports = {
 },
 
 
-  async apagarUsuarios(request, response) {
+ async apagarUsuarios(request, response) {
+  try {
+    const { usu_id } = request.params;
+    console.log("Tentando excluir usuário ID:", usu_id);
+
+    // Use transaction to remove dependent records safely
+    const connection = await db.getConnection();
     try {
-      const { usu_id } = request.params;
-      const sql = 'DELETE FROM usuarios WHERE usu_id = ?';
-      const values = [usu_id];
-      const [result] = await db.query(sql, values);
+      await connection.beginTransaction();
+
+      // 1) Remover reservas relacionadas a objetos deste usuário
+      await connection.query(
+        'DELETE r FROM Reservas r JOIN Objetos o ON r.obj_id = o.obj_id WHERE o.usu_id = ?',
+        [usu_id]
+      );
+
+      // 2) Remover reservas feitas pelo próprio usuário
+      await connection.query('DELETE FROM Reservas WHERE usu_id = ?', [usu_id]);
+
+      // 3) Remover feedbacks do usuário
+      await connection.query('DELETE FROM Feedbacks WHERE usu_id = ?', [usu_id]);
+
+      // 4) Remover objetos deste usuário
+      await connection.query('DELETE FROM Objetos WHERE usu_id = ?', [usu_id]);
+
+      // 5) Finalmente remover o usuário
+      const [result] = await connection.query('DELETE FROM usuarios WHERE usu_id = ?', [usu_id]);
 
       if (result.affectedRows === 0) {
-        return response.status(404).json({
-          sucesso: false,
-          mensagem: `Usuário ${usu_id} não encontrado!`,
-        });
+        await connection.rollback();
+        connection.release();
+        return response.status(404).json({ sucesso: false, mensagem: `Usuário ${usu_id} não encontrado!` });
       }
 
-      return response.status(200).json({
-        sucesso: true,
-        mensagem: `Usuário ${usu_id} excluido com sucesso!`,
-        dados: null
-      });
-    } catch (error) {
-      return response.status(500).json({
-        sucesso: false,
-        mensagem: 'Erro na requisição.',
-        dados: error.message
-      });
+      await connection.commit();
+      connection.release();
+
+      return response.status(200).json({ sucesso: true, mensagem: `Usuário ${usu_id} excluído com sucesso!`, dados: null });
+    } catch (txErr) {
+      await connection.rollback();
+      connection.release();
+      console.error('Erro ao excluir usuário (transaction):', txErr);
+      return response.status(500).json({ sucesso: false, mensagem: 'Erro ao excluir usuário.', dados: txErr.message });
     }
-  },
+
+  } catch (error) {
+    console.log("ERRO REAL:", error);
+    return response.status(500).json({
+      sucesso: false,
+      mensagem: 'Erro na requisição.',
+      dados: error.message
+    });
+  }
+},
 
 async login(request, response) {
   try {
