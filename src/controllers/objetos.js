@@ -17,17 +17,31 @@ module.exports = {
 
         try {
             // 🔹 Base SQL com aliases (nomes de campos tratados)
-            let sql = `
+            // let sql = `
+            //     SELECT 
+            //         obj_id AS id,
+            //         categ_id AS categoria_id,
+            //         usu_id AS usuario_id,
+            //         obj_descricao AS descricao,
+            //         obj_foto AS foto,
+            //         obj_local_encontrado AS local_encontrado,
+            //         DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS data_publicacao,
+            //         obj_status AS status,
+            //         obj_encontrado = 1 AS encontrado
+            //     FROM objetos
+            //     WHERE 1=1
+            // `;
+                        let sql = `
                 SELECT 
-                    obj_id AS id,
-                    categ_id AS categoria_id,
-                    usu_id AS usuario_id,
-                    obj_descricao AS descricao,
-                    obj_foto AS foto,
-                    obj_local_encontrado AS local_encontrado,
-                    DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS data_publicacao,
-                    obj_status AS status,
-                    obj_encontrado = 1 AS encontrado
+                    obj_id,
+                    categ_id,
+                    usu_id,
+                    obj_descricao,
+                    obj_foto,
+                    obj_local_encontrado,
+                    DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS obj_data_publicacao,
+                    obj_status,
+                    obj_encontrado = 1 AS obj_encontrado
                 FROM objetos
                 WHERE 1=1
             `;
@@ -109,19 +123,21 @@ module.exports = {
                     (?,?,?,?,?,?,?,?)
             `;
 
-            const values = [categ_id, usu_id, obj_descricao, imagem.filename, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
+            const filename = imagem ? imagem.filename : null;
+            const values = [categ_id, usu_id, obj_descricao, filename, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
             const [result] = await db.query(sql, values)
+            // Retorna a URL completa da imagem em vez do objeto do multer
             const dados = {
                 obj_id: result.insertId,
                 categ_id,
                 usu_id,
                 obj_descricao,
-                imagem,
+                // gera uma URL pública mesmo que o arquivo não exista (usa padrão sem.png)
+                foto: gerarUrl(filename, 'objetos', 'sem.png'),
                 obj_local_encontrado,
                 obj_data_publicacao,
                 obj_status,
                 obj_encontrado
-
             };
 
             return response.status(200).json({
@@ -164,7 +180,16 @@ module.exports = {
             }
 
             const dados = {
-                obj_id, categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado
+                obj_id,
+                categ_id,
+                usu_id,
+                obj_descricao,
+                // garante que o frontend receba a URL completa da imagem
+                foto: gerarUrl(obj_foto, 'objetos', 'sem.png'),
+                obj_local_encontrado,
+                obj_data_publicacao,
+                obj_status,
+                obj_encontrado
             };
 
             return response.status(200).json({
