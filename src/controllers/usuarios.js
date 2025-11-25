@@ -1,6 +1,7 @@
 const db = require('../database/connection');
 
 module.exports = {
+  
   async listarUsuarios(request, response) {
     try {
       const sql = `
@@ -130,6 +131,47 @@ module.exports = {
     }
   },
 
+  async editarSenha(request, response) {
+  try {
+    const { usu_id } = request.params;
+    const { senha_antiga, nova_senha } = request.body;
+
+    // 1. Buscar usuário
+    const [user] = await db.query("SELECT usu_senha FROM usuarios WHERE usu_id = ?", [usu_id]);
+
+    if (user.length === 0) {
+      return response.status(404).json({
+        sucesso: false,
+        mensagem: "Usuário não encontrado."
+      });
+    }
+
+    // 2. Validar se a senha antiga confere
+    if (user[0].usu_senha !== senha_antiga) {
+      return response.status(400).json({
+        sucesso: false,
+        mensagem: "Senha antiga incorreta."
+      });
+    }
+
+    // 3. Atualizar senha
+    await db.query("UPDATE usuarios SET usu_senha = ? WHERE usu_id = ?", [nova_senha, usu_id]);
+
+    return response.status(200).json({
+      sucesso: true,
+      mensagem: "Senha atualizada com sucesso!"
+    });
+
+  } catch (error) {
+    return response.status(500).json({
+      sucesso: false,
+      mensagem: "Erro no servidor.",
+      dados: error.message
+    });
+  }
+},
+
+
   async apagarUsuarios(request, response) {
     try {
       const { usu_id } = request.params;
@@ -158,43 +200,44 @@ module.exports = {
     }
   },
 
-  async login(request, response) {
-    try {
-      const { email, senha } = request.query;
+async login(request, response) {
+  try {
+    const { email, senha } = request.query;
 
-      const sql = `
-        SELECT
-          usu_id, usu_nome, usu_tipo
-        FROM
-          usuarios
-        WHERE
-          usu_email = ? AND usu_senha = ?;
-      `;
+    const sql = `
+      SELECT
+        usu_id, usu_nome, usu_tipo, usu_email, usu_senha
+      FROM
+        usuarios
+      WHERE
+        usu_email = ? AND usu_senha = ?;
+    `;
 
-      const values = [email, senha];
+    const values = [email, senha];
 
-      const [rows] = await db.query(sql, values);
-      const nItens = rows.length;
+    const [rows] = await db.query(sql, values);
+    const nItens = rows.length;
 
-      if (nItens < 1) {
-        return response.status(403).json({
-          sucesso: false,
-          mensagem: 'Login e/ou senha inválido.',
-          dados: null,
-        });
-      }
-
-      return response.status(200).json({
-        sucesso: true,
-        mensagem: 'Login efetuado com sucesso',
-        dados: rows
-      });
-    } catch (error) {
-      return response.status(500).json({
+    if (nItens < 1) {
+      return response.status(403).json({
         sucesso: false,
-        mensagem: 'Erro na requisição.',
-        dados: error.message
+        mensagem: 'Login e/ou senha inválido.',
+        dados: null,
       });
     }
-  },
+
+    return response.status(200).json({
+      sucesso: true,
+      mensagem: 'Login efetuado com sucesso',
+      dados: rows
+    });
+  } catch (error) {
+    return response.status(500).json({
+      sucesso: false,
+      mensagem: 'Erro na requisição.',
+      dados: error.message
+    });
+  }
+},
+
 };
