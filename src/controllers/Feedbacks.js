@@ -24,48 +24,38 @@ module.exports = {
             });
         }
     },
-    async cadastrarFeedbackss(request, response) {
+    async cadastrarFeedbacks(request, response) {
         try {
+        const { usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao } = request.body;
 
-            const { usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao } = request.body;
+        const sql = `
+           INSERT INTO feedbacks (usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao) 
+           VALUES (?, ?, ?, ?);
+        `;
 
+        const values = [usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao];
 
-            const sql = `
-           INSERT INTO feedbacks ( usu_id, fbck_mensagem, 
-           fbck_data_envio, fbck_avaliacao) 
-           VALUES 
-           (?,?,?,?);
-           
-           `;
+        const [result] = await db.query(sql, values);
 
-            const values = [usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao];
-
-            const [result] = await db.query(sql, values);
-
-            const dados = {
+        return response.status(201).json({
+            sucesso: true,
+            mensagem: "Feedback cadastrado!",
+            dados: {
                 fbck_id: result.insertId,
                 usu_id,
                 fbck_mensagem,
                 fbck_data_envio,
                 fbck_avaliacao
-
             }
-
-
-
-            return response.status(200).json({
-                sucesso: true,
-                mensagem: 'Cadastro de Feedbacks',
-                dados: dados
-            });
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false,
-                mensagem: 'Erro na requisição.',
-                dados: error.message
-            });
-        }
-    },
+        });
+    } catch (error) {
+        return response.status(500).json({
+            sucesso: false,
+            mensagem: "Erro ao cadastrar feedback",
+            dados: error.message
+        });
+    }
+},
     async editarFeedbacks(request, response) {
         try {
             const { usu_id, fbck_mensagem, fbck_data_envio, fbck_avaliacao } = request.body;
