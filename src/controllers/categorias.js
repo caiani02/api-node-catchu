@@ -3,40 +3,41 @@ const { gerarUrl } = require('../utils/gerarUrl');
 const objetos = require('./objetos');
 
 module.exports = {
-async listarCategorias(request, response) {
-    try {
+    async listarCategorias(request, response) {
+        try {
 
-        const sql = `
-            SELECT 
-                categ_id, 
-                categ_nome, 
-                categ_icone
-            FROM categorias;
-        `;
+            const sql= `
+                SELECT 
+                    categ_id, categ_nome, 
+                    categ_icone 
+                FROM categorias;
+            `;
 
-        const [rows] = await db.query(sql);
-        const nItens = rows.length;
+            const [rows] = await db.query(sql);
+            const nItens = rows.length;
 
-        const dados = rows.map(categoria => ({
-            ...categoria,
-            categ_icone: gerarUrl(categoria.categ_icone, 'categorias', 'sem.jpg')
-        }));
+const dados = rows.map(categorias => ({
 
-        return response.status(200).json({
-            sucesso: true,
-            mensagem: 'Lista de Categorias',
-            nItens,
-            dados
-        });
+    ...categorias,
+    ing_img: gerarUrl(categorias.ing_img, 'categorias', 'sem.jpg')
 
-    } catch (error) {
-        return response.status(500).json({
-            sucesso: false,
-            mensagem: 'Erro na requisição.',
-            dados: error.message
-        });
-    }
-},
+}));
+
+
+            return response.status(200).json({
+                sucesso: true, 
+                mensagem: 'Lista de Categorias',
+                nItens,
+                dados
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false, 
+                mensagem: 'Erro na requisição.', 
+                dados: error.message
+            });
+        }
+    }, 
     async cadastrarCategorias(request, response) {
         try {
 
