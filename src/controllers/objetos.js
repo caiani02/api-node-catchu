@@ -75,17 +75,18 @@ module.exports = {
             }
 
             // 🔹 Paginação
-            sql += ' LIMIT ?, ?';
-            params.push(offset, parseInt(limit));
+            //sql += ' LIMIT ?, ?';
+            //params.push(offset, parseInt(limit));
 
             // 🔹 Execução da query
             const [rows] = await db.query(sql, params);
             const nItens = rows.length;
 
+
             const dados = rows.map(objetos => ({
 
                 ...objetos,
-                foto: gerarUrl(objetos.foto, 'objetos', 'sem.png')
+                foto: gerarUrl(objetos.obj_foto, 'Objetos', 'sem.png')
 
             }));
 
@@ -123,7 +124,7 @@ module.exports = {
                     (?,?,?,?,?,?,?,?)
             `;
 
-            const filename = imagem ? imagem.filename : null;
+            const filename = imagem ? `${process.env.BD_SERVIDOR}:${process.env.PORT}/public/objetos/${imagem.filename}` : null;
             const values = [categ_id, usu_id, obj_descricao, filename, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
             const [result] = await db.query(sql, values)
             // Retorna a URL completa da imagem em vez do objeto do multer
@@ -133,7 +134,7 @@ module.exports = {
                 usu_id,
                 obj_descricao,
                 // gera uma URL pública mesmo que o arquivo não exista (usa padrão sem.png)
-                foto: gerarUrl(filename, 'objetos', 'sem.png'),
+                foto: gerarUrl(filename, 'Objetos', 'sem.png'),
                 obj_local_encontrado,
                 obj_data_publicacao,
                 obj_status,
