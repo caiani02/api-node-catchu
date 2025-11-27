@@ -8,7 +8,8 @@ module.exports = {
             obj_descricao,
             obj_local_encontrado,
             obj_encontrado,
-            obj_status,
+            obj_status, 
+            categ_nome, 
             page = 1,
             limit = 5
         } = request.query; 
@@ -33,16 +34,18 @@ module.exports = {
             // `;
                         let sql = `
                 SELECT 
-                    obj_id,
-                    categ_id,
-                    usu_id,
-                    obj_descricao,
-                    obj_foto,
-                    obj_local_encontrado,
-                    DATE_FORMAT(obj_data_publicacao, '%d/%m/%Y') AS obj_data_publicacao,
-                    obj_status,
-                    obj_encontrado = 1 AS obj_encontrado
-                FROM objetos
+                    o.obj_id,
+                    o.categ_id,
+                    o.usu_id,
+                    o.obj_descricao,
+                    o.obj_foto,
+                    o.obj_local_encontrado, 
+                    c.categ_nome, 
+                    DATE_FORMAT(o.obj_data_publicacao, '%d/%m/%Y') AS obj_data_publicacao,
+                    o.obj_status,
+                    o.obj_encontrado = 1 AS obj_encontrado
+                FROM objetos o 
+                INNER JOIN categorias c ON c.categ_id = o.categ_id  
                 WHERE 1=1
             `;
 
@@ -50,28 +53,33 @@ module.exports = {
 
             // 🔹 Pesquisa com múltiplos parâmetros
             if (obj_id) {
-                sql += ' AND obj_id = ?';
+                sql += ' AND o.obj_id = ?';
                 params.push(obj_id);
             }
 
             if (obj_descricao) {
-                sql += ' AND obj_descricao LIKE ?';
+                sql += ' AND o.obj_descricao LIKE ?';
                 params.push(`%${obj_descricao}%`);
             }
 
             if (obj_local_encontrado) {
-                sql += ' AND obj_local_encontrado LIKE ?';
+                sql += ' AND o.obj_local_encontrado LIKE ?';
                 params.push(`%${obj_local_encontrado}%`);
             }
 
             if (obj_status) {
-                sql += ' AND obj_status = ?';
+                sql += ' AND o.obj_status = ?';
                 params.push(obj_status);
             }
 
             if (obj_encontrado) {
-                sql += ' AND obj_encontrado = ?';
+                sql += ' AND o.obj_encontrado = ?';
                 params.push(obj_encontrado);
+            }
+
+            if (categ_nome) {
+                sql += ' AND c.categ_nome = ?';
+                params.push(categ_nome);
             }
 
             // 🔹 Paginação
