@@ -15,7 +15,6 @@ CREATE TABLE Usuarios (
 CREATE TABLE Categorias (
     categ_id INT AUTO_INCREMENT PRIMARY KEY,
     categ_nome VARCHAR(80) NOT NULL,
-    categ_icone VARCHAR(80) NOT NULL
 );
 
 -- Tabela de Objetos
