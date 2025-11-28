@@ -21,10 +21,15 @@ const uploadImage = (destinationFolder) => {
       cb(null, fullPath);
     },
     filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      // Extrai a extensão do arquivo a partir do mimetype
-      const extension = file.mimetype.split('/')[1];
-      cb(null, `${uniqueSuffix}.${extension}`);
+      // Preserva o nome original do arquivo (sanitizado)
+      // Ex: 'Celular preto.png' -> 'Celular_preto.png'
+      // Remove caracteres perigosos e normaliza espaços
+      let originalName = file.originalname || 'arquivo.png';
+      // Substitui espaços por underline e remove caracteres não permitidos
+      originalName = originalName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '');
+      // Se por algum motivo ficou vazio, use um fallback
+      if (!originalName) originalName = `arquivo.png`;
+      cb(null, originalName);
     }
   });
 

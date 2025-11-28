@@ -1,5 +1,6 @@
 const db = require('../database/connection');
 const { gerarUrl } = require('../utils/gerarUrl');
+const path = require('path');
 
 module.exports = {
     async listarObjetos(request, response) {
@@ -132,7 +133,8 @@ module.exports = {
                     (?,?,?,?,?,?,?,?)
             `;
 
-            const filename = imagem ? `${process.env.BD_SERVIDOR}:${process.env.PORT}/public/objetos/${imagem.filename}` : null;
+            // Armazena apenas o nome do arquivo no banco (ex: 'celular1.png')
+            const filename = imagem ? imagem.filename : null;
             const values = [categ_id, usu_id, obj_descricao, filename, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado]
             const [result] = await db.query(sql, values)
             // Retorna a URL completa da imagem em vez do objeto do multer
@@ -177,7 +179,9 @@ module.exports = {
                     obj_id = ?;
             `;
 
-            const values = [categ_id, usu_id, obj_descricao, obj_foto, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado, obj_id];
+            // Normaliza obj_foto: se for uma URL, extrai apenas o basename (nome.png)
+            const fotoNome = obj_foto ? path.basename(obj_foto) : obj_foto;
+            const values = [categ_id, usu_id, obj_descricao, fotoNome, obj_local_encontrado, obj_data_publicacao, obj_status, obj_encontrado, obj_id];
             const [result] = await db.query(sql, values);
 
             if (result.affectedRows === 0) {
@@ -193,8 +197,8 @@ module.exports = {
                 categ_id,
                 usu_id,
                 obj_descricao,
-                // garante que o frontend receba a URL completa da imagem
-                foto: gerarUrl(obj_foto, 'objetos', 'sem.png'),
+                // garante que o frontend receba a URL completa da imagem (usa o nome normalizado)
+                foto: gerarUrl(fotoNome, 'Objetos', 'sem.png'),
                 obj_local_encontrado,
                 obj_data_publicacao,
                 obj_status,
