@@ -36,43 +36,46 @@ module.exports = {
             });
         }
     }, 
-    async cadastrarReservas(request, response) {
-        try {
+   
+   async cadastrarReservas(request, response) {
+    try {
 
-            const {obj_id, usu_id, res_data, res_status} = request.body;
+        const { obj_id, usu_id, res_status } = request.body;
 
-            const sql = `
+        const sql = `
             INSERT INTO reservas
-             (obj_id, usu_id, res_data, res_status) 
+                (obj_id, usu_id, res_data, res_status) 
             VALUES 
-                (?,?,?,?)
-            `;
+                (?, ?, NOW(), ?)
+        `;
 
-            const values = [obj_id, usu_id, res_data, res_status];
+        const values = [obj_id, usu_id, res_status];
 
-            const [result] = await db.query(sql, values);
+        const [result] = await db.query(sql, values);
 
-            const dados = {
-                res_id: result.insertId,
-                obj_id,
-                usu_id,
-                res_data,
-                res_status
-            }
+        const dados = {
+            res_id: result.insertId,
+            obj_id,
+            usu_id,
+            res_data: new Date(), // retorna a data atual para o front
+            res_status
+        };
 
-            return response.status(200).json({
-                sucesso: true, 
-                mensagem: 'Cadastro de reservas', 
-                dados: dados
-            });
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
-                dados: error.message
-            });
-        }
-    }, 
+        return response.status(200).json({
+            sucesso: true,
+            mensagem: 'Cadastro de reservas realizado com sucesso!',
+            dados
+        });
+
+    } catch (error) {
+        return response.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro na requisição.',
+            dados: error.message
+        });
+    }
+},
+    
     async editarReservas(request, response) {
         try {
 
@@ -120,37 +123,48 @@ module.exports = {
             });
         }
     }, 
-    async apagarReservas(request, response) {
-        try {
+   async apagarReservas(request, response) {
+    try {
+        const { res_id } = request.params;
 
-            const {res_id} = request.params;
+        // 1. Buscar qual objeto está nessa reserva
+        const [reserva] = await db.query(
+            "SELECT obj_id FROM reservas WHERE res_id = ?",
+            [res_id]
+        );
 
-            const sql = `DELETE FROM reservas WHERE res_id = ?`;
-
-            const values = [res_id];
-
-            const [result] = await db.query (sql, values);
-
-            if (result.affectedRows === 0){
-                return response.status (404).json ({
-                    sucesso:false,
-                    mensagem:`Reserva ${res_id} não encontrado!`,
-                    dados: null
-                });
-            }
-
-            return response.status(200).json({
-                sucesso: true, 
-                mensagem: `Reserva ${res_id} excluído com sucesso`, 
+        if (reserva.length === 0) {
+            return response.status(404).json({
+                sucesso: false,
+                mensagem: `Reserva ${res_id} não encontrada!`,
                 dados: null
             });
-
-        } catch (error) {
-            return response.status(500).json({
-                sucesso: false, 
-                mensagem: 'Erro na requisição.', 
-                dados: error.message
-            });
         }
-    }, 
-};  
+
+        const objID = reserva[0].obj_id;
+
+        // 2. Deletar a reserva
+        await db.query("DELETE FROM reservas WHERE res_id = ?", [res_id]);
+
+        // 3. Atualizar o objeto para ficar disponível novamente
+        await db.query(
+            "UPDATE objetos SET obj_status = 'disponivel' WHERE obj_id = ?",
+            [objID]
+        );
+
+        return response.status(200).json({
+            sucesso: true,
+            mensagem: `Reserva ${res_id} excluída e objeto liberado!`,
+            dados: null
+        });
+
+    } catch (error) {
+        return response.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro na requisição.',
+            dados: error.message
+        });
+    }
+},
+
+};
