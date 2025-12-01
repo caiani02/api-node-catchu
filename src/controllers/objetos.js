@@ -221,33 +221,36 @@ module.exports = {
 
 
 
-    async apagarObjetos(request, response) {
-        try {
+   async apagarObjetos(request, response) {
+    try {
+        const { obj_id } = request.params;
 
-            const { obj_id } = request.params;
-            const sql = `DELETE FROM objetos WHERE obj_id = ?`
-            const values = [obj_id]
-            const [result] = await db.query(sql, values);
+        // 🔥 1) Apagar reservas associadas
+        const sqlReservas = `DELETE FROM reservas WHERE obj_id = ?`;
+        await db.query(sqlReservas, [obj_id]);
 
-            if (result.affectedRows === 0) {
-                return response.status(404).json({
-                    sucesso: false,
-                    mensagem: `Objetos ${obj_id} não encontrado!`,
-                    dados: null
-                });
-            }
+        // 🔥 2) Agora sim apagar o objeto
+        const sqlObjeto = `DELETE FROM objetos WHERE obj_id = ?`;
+        const [result] = await db.query(sqlObjeto, [obj_id]);
 
-            return response.status(200).json({
-                sucesso: true,
-                mensagem: 'Exclusão de objetos',
-                dados: null
-            });
-        } catch (error) {
-            return response.status(500).json({
+        if (result.affectedRows === 0) {
+            return response.status(404).json({
                 sucesso: false,
-                mensagem: 'Erro na requisição.',
-                dados: error.message
+                mensagem: `Objeto ${obj_id} não encontrado!`
             });
         }
-    },
-};  
+
+        return response.status(200).json({
+            sucesso: true,
+            mensagem: "Objeto apagado com sucesso!"
+        });
+
+    } catch (error) {
+        console.error("🔥 ERRO AO APAGAR OBJETO:", error);
+        return response.status(500).json({
+            sucesso: false,
+            mensagem: "Erro na requisição.",
+            dados: error.message
+        });
+    }
+}}
