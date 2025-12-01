@@ -95,16 +95,16 @@ SELECT * FROM usuarios;
 
 Tabela de categorias
 
-INSERT INTO categorias ( categ_nome) VALUES
-( 'Resgatados');
-INSERT INTO categorias ( categ_nome) VALUES
-('Roupas');
-INSERT INTO categorias ( categ_nome) VALUES
-( 'Objetos gerais');
-INSERT INTO categorias ( categ_nome) VALUES
-( 'Material escolar');
-INSERT INTO categorias ( categ_nome) VALUES
-( 'Calçados');
+INSERT INTO categorias ( categ_nome, categ_icone) VALUES
+( 'Resgatados', 'resgatados.png');
+INSERT INTO categorias ( categ_nome, categ_icone) VALUES
+('Roupas', 'roupas.png');
+INSERT INTO categorias ( categ_nome, categ_icone) VALUES
+( 'Objetos gerais', 'objetos.png');
+INSERT INTO categorias ( categ_nome, categ_icone) VALUES
+( 'Material escolar', 'material_escolar.png');
+INSERT INTO categorias ( categ_nome, categ_icone) VALUES
+( 'Calçados', 'calcados.png');
 
 
 SELECT * FROM categorias;
