@@ -15,14 +15,14 @@ CREATE TABLE Usuarios (
 CREATE TABLE Categorias (
     categ_id INT AUTO_INCREMENT PRIMARY KEY,
     categ_nome VARCHAR(80) NOT NULL,
-    categ_icone VARCHAR (255)
+    categ_icone VARCHAR (80)
 );
 
 -- Tabela de Objetos
 CREATE TABLE Objetos (
     obj_id INT AUTO_INCREMENT PRIMARY KEY,
     categ_id INT NOT NULL,
-    usu_id INT NOT NULL,
+    usu_id INT NOT NULL, -- Usuário que retirou objeto
     obj_descricao TINYTEXT NOT NULL,
     obj_foto VARCHAR(255),
     obj_local_encontrado VARCHAR(100) NOT NULL,
