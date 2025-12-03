@@ -83,11 +83,7 @@ module.exports = {
                 params.push(categ_nome);
             }
 
-            // 🔹 Paginação
-            //sql += ' LIMIT ?, ?';
-            //params.push(offset, parseInt(limit));
-
-            // 🔹 Execução da query
+           
             const [rows] = await db.query(sql, params);
             const nItens = rows.length;
 
