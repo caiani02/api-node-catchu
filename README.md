@@ -88,7 +88,7 @@ Projeto desenvolvido por:
 
 - Murilo Grinaldi
 - Pedro Martins
-- Caini Lima
+- Caini Souza
 - Thiago Sampaio
 
 ---
